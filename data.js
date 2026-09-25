@@ -37,6 +37,14 @@ export const provinces = [
   ['Cà Mau','Nam','Tỉnh','Đất Mũi, hệ sinh thái rừng ngập mặn','Bạc Liêu']
 ].map(([name,region,type,feature,merged]) => ({name,region,type,feature,merged}));
 
+// Danh sách 63 đơn vị cấp tỉnh ngay trước đợt sắp xếp 2025.
+// Thành phố Huế đã thay Thừa Thiên Huế từ 01/01/2025.
+const formerCities=new Set(['Hà Nội','Hải Phòng','Huế','Đà Nẵng','Hồ Chí Minh','Cần Thơ']);
+export const historicProvinces=provinces.flatMap(current=>
+  [current.name,...(current.merged?current.merged.split(',').map(x=>x.trim()):[])]
+    .map(name=>({name,current:current.name,region:current.region,type:formerCities.has(name)?'Thành phố':'Tỉnh'}))
+);
+
 export const lessons = [
   {id:'vi-tri',icon:'◎',category:'Nền tảng',title:'Vị trí & lãnh thổ',time:6,summary:'Việt Nam ở đâu trên bản đồ thế giới và vì sao vị trí đó quan trọng?',points:[['Vị trí','Việt Nam nằm ở rìa phía đông bán đảo Đông Dương, thuộc khu vực Đông Nam Á. Phần đất liền có hình dạng kéo dài theo trục bắc – nam.'],['Tiếp giáp','Trên đất liền, Việt Nam tiếp giáp Trung Quốc, Lào và Campuchia; phía đông và nam hướng ra Biển Đông.'],['Ý nghĩa','Vị trí nối giữa lục địa và biển tạo điều kiện giao lưu kinh tế, văn hóa, đồng thời làm thiên nhiên phân hóa đa dạng.']],remember:'Nhớ 3 nước láng giềng trên đất liền: Trung Quốc – Lào – Campuchia.'},
   {id:'dia-hinh',icon:'△',category:'Tự nhiên',title:'Địa hình Việt Nam',time:7,summary:'Từ núi cao Tây Bắc đến đồng bằng và dải ven biển.',points:[['Đặc điểm chung','Địa hình đồi núi chiếm phần lớn diện tích đất liền, chủ yếu là đồi núi thấp. Địa hình thấp dần từ tây bắc xuống đông nam.'],['Các khu vực','Miền núi gồm Đông Bắc, Tây Bắc, Trường Sơn Bắc và Trường Sơn Nam. Hai đồng bằng lớn là đồng bằng sông Hồng và đồng bằng sông Cửu Long.'],['Tác động','Địa hình ảnh hưởng đến khí hậu, sông ngòi, giao thông, phân bố dân cư và sản xuất.']],remember:'Đồi núi là phần lớn diện tích; đồng bằng tập trung dân cư và nhiều hoạt động nông nghiệp.'},
